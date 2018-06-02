@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx
+    volumes:
+     - "./default.conf:/etc/nginx/conf.d/default.conf"
+    ports:
+     - "8000:80"
+    links:
+      - airports-svc:airports-svc
+      - countries-svc:countries-svc
+
+  airports-svc:
+    build:
+      context: .
+      args:
+        assembly: airports-assembly-1.0.1.jar
+    expose:
+      - "8080"
+
+  countries-svc:
+    build:
+      context: .
+      args:
+        assembly: countries-assembly-1.0.1.jar
+    expose:
+      - "8080"
+
