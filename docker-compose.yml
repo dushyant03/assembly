@@ -2,7 +2,7 @@ version: '3'
 
 services:
   nginx:
-    image: nginx
+    image: dushyant03/assembly-nginx
     volumes:
      - "./default.conf:/etc/nginx/conf.d/default.conf"
     ports:
@@ -12,18 +12,12 @@ services:
       - countries-svc:countries-svc
 
   airports-svc:
-    build:
-      context: .
-      args:
-        assembly: airports-assembly-1.0.1.jar
+    image: dushyant03/airports-assembly
     expose:
       - "8080"
 
   countries-svc:
-    build:
-      context: .
-      args:
-        assembly: countries-assembly-1.0.1.jar
+    image: dushyant03/countries-assembly
     expose:
       - "8080"
 
